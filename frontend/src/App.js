@@ -238,7 +238,7 @@ function App() {
               <ul>
                 {cartItems.map((item) => (
                   <li key={item.product} id="cart-list">
-                    <p>{console.log(cartItems)}</p>
+                    {/* <p>{console.log(cartItems)}</p> */}
                     <div className="cart-item">
                       <div>
                         <img src={item.image} alt={item.name}></img>
