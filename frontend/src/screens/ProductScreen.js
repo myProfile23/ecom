@@ -7,6 +7,7 @@ import MessageBox from "../components/MessageBox";
 import Rating from "../components/Rating";
 import { PRODUCT_REVIEW_CREATE_RESET } from "../constants/productConstants";
 import styled from "styled-components";
+import { addToCart } from "../actions/cartActions";
 
 export default function ProductScreen(props) {
   const dispatch = useDispatch();
@@ -37,7 +38,10 @@ export default function ProductScreen(props) {
     dispatch(detailsProduct(productId));
   }, [dispatch, productId, successReviewCreate]);
   const addToCartHandler = () => {
-    props.history.push(`/cart/${productId}?qty=${qty}`);
+    dispatch(addToCart(productId, qty));
+    document.getElementById("cart").classList.add("open");
+
+    // props.history.push(`/cart/${productId}?qty=${qty}`);
   };
   const submitHandler = (e) => {
     e.preventDefault();
@@ -51,19 +55,26 @@ export default function ProductScreen(props) {
   };
 
   const show = (e) => {
-    console.log(e.target.id);
+    document.getElementById(e.target.id).classList.add("active");
+
     if (e.target.id === "1") {
+      document.getElementById("2").classList.remove("active");
+      document.getElementById("3").classList.remove("active");
       document.getElementById("attributes").style.display = "none";
       document.getElementById("description").style.display = "block";
       document.getElementById("reviews").style.display = "none";
     }
 
     if (e.target.id === "2") {
+      document.getElementById("1").classList.remove("active");
+      document.getElementById("3").classList.remove("active");
       document.getElementById("attributes").style.display = "table";
       document.getElementById("description").style.display = "none";
       document.getElementById("reviews").style.display = "none";
     }
     if (e.target.id === "3") {
+      document.getElementById("2").classList.remove("active");
+      document.getElementById("1").classList.remove("active");
       document.getElementById("reviews").style.display = "block";
       document.getElementById("description").style.display = "none";
       document.getElementById("attributes").style.display = "none";
@@ -160,7 +171,7 @@ export default function ProductScreen(props) {
           <div className="down-container">
             <div className="tap-top">
               <ul>
-                <li id="1" onClick={(e) => show(e)}>
+                <li id="1" onClick={(e) => show(e)} className="active">
                   Description
                 </li>
                 <li id="2" onClick={(e) => show(e)}>
@@ -312,6 +323,11 @@ const ProductScreenStyled = styled.div`
   padding: 2rem;
   img {
     width: 50rem;
+  }
+
+  .active {
+    font-weight: 500;
+    color: #ff8000;
   }
 
   .wrapper {

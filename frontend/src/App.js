@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { BrowserRouter, Link, Route } from "react-router-dom";
+import { BrowserRouter, Link, NavLink, Route } from "react-router-dom";
 import { signout } from "./actions/userActions";
 import AdminRoute from "./components/AdminRoute";
 import PrivateRoute from "./components/PrivateRoute";
@@ -84,8 +84,12 @@ function App() {
             </Link>
           </div>
           <div className="nav-items">
-            <Link to="/search/men">Men</Link>
-            <Link to="/search/women">Women</Link>
+            <NavLink to="/search/men" activeClassName="active">
+              Men
+            </NavLink>
+            <NavLink to="/search/women" activeClassName="active">
+              Women
+            </NavLink>
             <Link to="/">About</Link>
             <Link to="/">Contact</Link>
           </div>
@@ -152,7 +156,7 @@ function App() {
               </div>
             )}
             {userInfo && userInfo.isAdmin && (
-              <div className="dropdown">
+              <div className="dropdown" style={{ margin: "auto" }}>
                 <Link to="#admin">
                   Admin <i className="fa fa-caret-down"></i>
                 </Link>
@@ -186,7 +190,7 @@ function App() {
                 className="close-sidebar"
                 type="button"
               >
-                <i className="fa fa-close"></i>
+                <AiOutlineClose />
               </button>
             </li>
             {loadingCategories ? (
@@ -212,7 +216,10 @@ function App() {
             <li>
               <strong>Cart</strong>
               <button
-                onClick={() => setCartSidebarIsOpen(false)}
+                onClick={() =>
+                  setCartSidebarIsOpen(false) ||
+                  document.getElementById("cart").classList.remove("open")
+                }
                 className="close-sidebar"
                 type="button"
               >
@@ -264,10 +271,26 @@ function App() {
                 </h2>
                 <div className="checkout-buttons">
                   <Link to="/cart">
-                    <button className="primary">View cart</button>
+                    <button
+                      className="primary"
+                      onClick={() =>
+                        setCartSidebarIsOpen(false) ||
+                        document.getElementById("cart").classList.remove("open")
+                      }
+                    >
+                      View cart
+                    </button>
                   </Link>
                   <Link to="/signin?redirect=shipping">
-                    <button className="primary">Checkout</button>
+                    <button
+                      className="primary"
+                      onClick={() =>
+                        setCartSidebarIsOpen(false) ||
+                        document.getElementById("cart").classList.remove("open")
+                      }
+                    >
+                      Checkout
+                    </button>
                   </Link>
                 </div>
               </ul>
@@ -401,6 +424,11 @@ const AppStyled = styled.div`
     gap: 5rem;
     font-size: 2rem;
   }
+
+  .active {
+    font-weight: 500;
+    color: #ff8000;
+  }
   aside {
     background: white;
   }
@@ -412,6 +440,7 @@ const AppStyled = styled.div`
       transition: transform 0.8s, opacity 0.25s;
       &:hover {
         transform: rotate(180deg);
+        color: #ff8000;
       }
     }
   }
@@ -421,6 +450,7 @@ const AppStyled = styled.div`
       transition: transform 0.8s, opacity 0.25s;
       &:hover {
         transform: rotate(180deg);
+        color: #ff8000;
       }
     }
     transform: translateX(150rem);

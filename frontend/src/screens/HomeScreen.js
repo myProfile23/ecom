@@ -39,6 +39,7 @@ export default function HomeScreen() {
     products.map(
       (product) => product.brand === "Puma" && tempArr.push(product)
     );
+
     return tempArr.map((product) => (
       <Product key={product._id} product={product}></Product>
     ));
@@ -49,7 +50,7 @@ export default function HomeScreen() {
       (product) => product.category === "Pants" && tempArr.push(product)
     );
     products.map(
-      (product) => product.category === "Joggers " && tempArr.push(product)
+      (product) => product.category === "Joggers" && tempArr.push(product)
     );
     return tempArr.map((product) => (
       <Product key={product._id} product={product}></Product>

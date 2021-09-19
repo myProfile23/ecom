@@ -61,7 +61,9 @@ export default function WomenScreen(props) {
         ) : error ? (
           <MessageBox variant="danger">{error}</MessageBox>
         ) : (
-          <div>{products.length} Results</div>
+          <div>
+            {products.filter((product) => product.woman).length} Results
+          </div>
         )}
         <div>
           Sort by
@@ -149,7 +151,7 @@ export default function WomenScreen(props) {
             <MessageBox variant="danger">{error}</MessageBox>
           ) : (
             <>
-              {products.length === 0 && (
+              {products.filter((product) => product.woman).length === 0 && (
                 <MessageBox>No Product Found</MessageBox>
               )}
               <div

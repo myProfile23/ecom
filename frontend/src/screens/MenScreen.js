@@ -61,7 +61,7 @@ export default function MenScreen(props) {
         ) : error ? (
           <MessageBox variant="danger">{error}</MessageBox>
         ) : (
-          <div>{products.length} Results</div>
+          <div>{products.filter((product) => product.man).length} Results</div>
         )}
         <div>
           Sort by
@@ -149,7 +149,7 @@ export default function MenScreen(props) {
             <MessageBox variant="danger">{error}</MessageBox>
           ) : (
             <>
-              {products.length === 0 && (
+              {products.filter((product) => product.man).length === 0 && (
                 <MessageBox>No Product Found</MessageBox>
               )}
               <div

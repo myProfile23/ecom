@@ -77,8 +77,12 @@ const SearchBoxStyled = styled.div`
     right: 22%;
     top: 32%;
     color: white;
+    transition: all 0.5s ease-in-out;
+
     :hover {
       cursor: pointer;
+      transform: rotate(180deg);
+      color: #ff8000;
     }
   }
   #box {
