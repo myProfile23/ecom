@@ -70,6 +70,7 @@ function App() {
   return (
     <BrowserRouter>
       <AppStyled className="grid-container">
+        useOutsideAlerter(wrapperRef);
         <header className="row">
           <div>
             <button
